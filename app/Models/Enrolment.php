@@ -3,40 +3,29 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Course;
+use App\Models\Learner;
 
 class Enrolment extends Model
 {
-    /**
-     * Indicates if the IDs are auto-incrementing.
-     *
-     * @var bool
-     */
-    public $incrementing = false;
+    use HasFactory;
 
-    /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'enrolments';
+    protected $fillable = ['learner_id', 'course_id', 'progress_percentage'];
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'learner_id',
-        'course_id',
-        'progress',
-    ];
+    public function learner()
+    {
+        return $this->belongsTo(Learner::class);
+    }
 
-    /**
-     * The attributes that should be cast.
-     *
-     * @var array
-     */
-    protected $casts = [
-        'progress' => 'decimal:2',
-    ];
+    public function course()
+    {
+        return $this->belongsTo(Course::class);
+    }
+
+    // ✅ ADD THIS TO FIX THE ERROR:
+    protected static function newFactory()
+    {
+        return \Database\Factories\EnrolmentFactory::new();
+    }
 }

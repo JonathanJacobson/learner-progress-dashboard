@@ -1,0 +1,10 @@
+services:
+  app:
+    image: laravelsail/php82-composer
+    container_name: learner_app
+    ports:
+      - 8000:8000
+    volumes:
+      - .:/var/www/html
+    working_dir: /var/www/html
+    entrypoint: ["bash", "start.sh"]

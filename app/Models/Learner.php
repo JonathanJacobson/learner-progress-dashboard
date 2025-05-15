@@ -2,20 +2,19 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Enrolment;
 
 class Learner extends Model
 {
     use HasFactory;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'firstname',
-        'lastname',
-    ];
+    protected $fillable = ['full_name'];
+
+    // 🔽 ADD THIS RELATIONSHIP:
+    public function enrolments()
+    {
+        return $this->hasMany(Enrolment::class);
+    }
 }

@@ -15,6 +15,7 @@ return new class extends Migration
         Schema::create('enrolments', function (Blueprint $table) {
             $table->foreignId('learner_id')->constrained();
             $table->foreignId('course_id')->constrained();
+			$table->unsignedTinyInteger('progress_percentage')->default(0); // ✅ Add this line
             $table->decimal('progress', 5, 2)->nullable();
             $table->primary(['learner_id', 'course_id']);
 
